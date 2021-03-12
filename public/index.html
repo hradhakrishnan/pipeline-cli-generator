@@ -1,0 +1,314 @@
+<html ng-app="lapi">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="scripts/core.js" type="text/javascript"></script>
+    <script src="scripts/pipeline.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/main.css" rel="stylesheet" />
+    </head>
+
+  <body>
+
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+      <!-- Header starts -->
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Pipeline api - cli gen</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+              <a class="mdl-navigation__link" href="https://cloud.google.com/life-sciences/docs/quickstart">API ref</a>
+              <a class="mdl-navigation__link" href="https://github.com/DataBiosphere/dsub">dsub</a>
+          </nav>
+        </div>
+      </header>
+      <!-- Header ends -->
+
+    <!-- Main starts -->
+      <main class="mdl-layout__content">
+        <!-- page content starts -->
+        <div class="page-content">
+
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+              <!--Card starts -->
+              <div class="pipeline-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <div class="mdl-card__title-text input-block">Input pipeline parameters</div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <form action="#">
+                    <!-- mdl tab start -->
+                    <div class ="mdl-tabs mdl-js-tabs">
+                      <!-- mdl tab bar start -->
+                      <div class = "mdl-tabs__tab-bar">
+                        <a href = "#vm-panel" class = "mdl-tabs__tab is-active">vm</a>
+                        <a href = "#container-panel" class = "mdl-tabs__tab ">container</a>
+                        <a href = "#project-panel" class = "mdl-tabs__tab">GCP Project</a>
+                        <a href = "#input-panel" class = "mdl-tabs__tab">Input</a>
+                        <a href = "#output-panel" class = "mdl-tabs__tab">Output</a>
+                      </div>
+                      <!-- mdl tab bar ends -->
+                      <!-- mdl tab content starts -->
+                      <div class = "mdl-tabs__panel is-active" id = "vm-panel">
+                        <div class="mdl-cell mdl-cell--12-col ">
+                          <div class="input-block">
+                            <span>Machine Info</span>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="machine-type" ng-model='machinetype'>
+                              <label class="mdl-textfield__label" for="machine-type">machine-type...</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="disk-size" ng-model='disksize'>
+                              <label class="mdl-textfield__label" for="disk-size">disk-size...</label>
+                            </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="boot-disk-size" ng-model='bootdisksize'>
+                              <label class="mdl-textfield__label" for="env-vars">boot-disk-size...</label>
+                            </div>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="preemptible" >
+                            <input type="checkbox" id="preemptible" class="mdl-checkbox__input" ng-model="preemptible" ng-true-value="'--preemptible'" ng-false-value="">
+                            <span class="mdl-checkbox__label">preemptible</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class = "mdl-tabs__panel" id = "container-panel">
+                        <div class="mdl-cell mdl-cell--12-col">
+                          <div class="input-block">
+                            <span>Container Info</span>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="sample3" ng-model="docker">
+                              <label class="mdl-textfield__label" for="sample1">docker image...</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class = "mdl-tabs__panel" id = "project-panel">
+                        <div class="mdl-cell mdl-cell--12-col">
+                          <div class="input-block">
+                            <span>Project / network info</span>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="sample1" ng-model='region'>
+                              <label class="mdl-textfield__label" for="sample1">Regions...</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="location" ng-model='location'>
+                              <label class="mdl-textfield__label" for="location">location...</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="network" ng-model='network'>
+                              <label class="mdl-textfield__label" for="machine-type">network...</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <input class="mdl-textfield__input" type="text" id="subnetwork" ng-model='subnetwork'>
+                              <label class="mdl-textfield__label" for="subnetwork">subnetwork...</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="zones" ng-model='zones'>
+                                <label class="mdl-textfield__label" for="zones">zones...</label>
+                            </div>
+                          </div>
+                         </div>
+                      </div>
+                      <div class = "mdl-tabs__panel" id = "input-panel">
+                          <div class="mdl-cell mdl-cell--12-col">
+                            <div class="input-block">
+                              <span>Inputs</span>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="sample2" ng-model="cmd">
+                                <label class="mdl-textfield__label" for="sample1">command line...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="sample4" ng-model="input">
+                                <label class="mdl-textfield__label" for="sample1">Inputs...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="yaml-file" ng-model="pipelinefile">
+                                <label class="mdl-textfield__label" for="yaml-file">pipeline-file...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="GCLOUD_WIDE_FLAG" ng-model="GCLOUD_WIDE_FLAG">
+                                <label class="mdl-textfield__label" for="logging">--GCLOUD_WIDE_FLAG</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="env-vars" ng-model='envvars'>
+                                <label class="mdl-textfield__label" for="env-vars">env-vars...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="inputs-from-file" ng-model='inputsfromfile'>
+                                <label class="mdl-textfield__label" for="env-vars">inputs-from-file...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="labels" ng-model='labels'>
+                                <label class="mdl-textfield__label" for="labels">labels...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="service-account-email" ng-model='serviceaccountemail'>
+                                <label class="mdl-textfield__label" for="service-account-email">service-account-email...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="service-account-scopes" ng-model='serviceaccountscopes'>
+                                <label class="mdl-textfield__label" for="service-account-scopes">service-account-scopes...</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <div class = "mdl-tabs__panel" id = "output-panel">
+                          <div class="mdl-cell mdl-cell--12-col">
+                            <div class="input-block">
+                              <span>Outputs</span>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="sample5" ng-model="output">
+                                <label class="mdl-textfield__label" for="sample1">Outputs...</label>
+                              </div>
+                              <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="logging" ng-model="logging">
+                                <label class="mdl-textfield__label" for="logging">--logging</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <!-- mdl tab content ends -->
+                    </div>
+                    <!-- mdl tab end -->
+                    </form>
+                  </div>
+            <!-- <div class="mdl-card__actions mdl-card--border">
+
+            </div> -->
+          </div>
+          <!--Card ends -->
+        </div>
+        <!--right Card begins -->
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+          <div class="pipeline-card mdl-card mdl-shadow--2dp">
+
+            <div class = "mdl-tabs mdl-js-tabs">
+              <!-- mdl tab bar start -->
+              <div class = "mdl-tabs__tab-bar">
+                <a href = "#tab1-panel" class = "mdl-tabs__tab is-active">pipeline api</a>
+                <a href = "#tab2-panel" class = "mdl-tabs__tab">dsub</a>
+              </div>
+              <!-- mdl tab bar ends -->
+              <!-- mdl tab content begins -->
+              <div class = "mdl-tabs__panel is-active" id = "tab1-panel">
+                <div class="mdl-cell mdl-cell--12-col">
+                  <span class="pipeline-title">cli command</span><br>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col code-block">
+                      <div ><span class="pipeline-code">gcloud beta lifesciences pipelines run \</span></div>
+                      <div ng-show="region"><span class="pipeline-code">--regions {{region}} \</span></div>
+                      <div ng-show="cmd"><span class="pipeline-code" >--command-line '{{cmd}}'  \ </span></div>
+                      <div ng-show="docker"><span class="pipeline-code">--docker-image "{{docker}}" \</span></div>
+                      <div ng-show="input"><span class="pipeline-code">--inputs IN={{input}} \</span></div>
+                      <div ng-show="output"><span class="pipeline-code">--outputs OUT={{output}} \</span></div>
+                      <div ng-show="logging"><span class="pipeline-code">--logging {{logging}} \</span></div>
+                      <div ng-show="pipelinefile"><span class="pipeline-code">--pipeline-file {{pipelinefile}} \</span></div>
+                      <div ng-show="disksize"><span class="pipeline-code">--disk-size {{disksize}} \</span></div>
+                      <div ng-show="envvars"><span class="pipeline-code">--env-vars {{envvars}} \</span></div>
+                      <div ng-show="inputsfromfile"><span class="pipeline-code">--inputs-from-file {{inputsfromfile}} \</span></div>
+                      <div ng-show="preemptible"><span class="pipeline-code"> {{preemptible}} \</span></div>
+                      <div ng-show="bootdisksize"><span class="pipeline-code">--boot-disk-size {{bootdisksize}} \</span></div>
+                      <div ng-show="labels"><span class="pipeline-code">--labels {{labels}} \</span></div>
+                      <div ng-show="location"><span class="pipeline-code">--location {{location}} \</span></div>
+                      <div ng-show="machinetype"><span class="pipeline-code">--machine-type {{machinetype}} \</span></div>
+                      <div ng-show="network"><span class="pipeline-code">--network {{network}} \</span></div>
+                      <div ng-show="subnetwork"><span class="pipeline-code">--subnetwork {{subnetwork}} \</span></div>
+                      <div ng-show="serviceaccountemail"><span class="pipeline-code">--service-account-email {{serviceaccountemail}} \</span></div>
+                      <div ng-show="serviceaccountscopes"><span class="pipeline-code">--service-account-scopes {{serviceaccountscopes}} \</span></div>
+                      <div ng-show="zones"><span class="pipeline-code">--zones {{zones}} \</span></div>
+                      <div ng-show='GCLOUD_WIDE_FLAG'><span class="pipeline-code"> {{GCLOUD_WIDE_FLAG}} \</span></div>
+                </div>
+              </div>
+              <div class = "mdl-tabs__panel" id = "tab2-panel">
+                <div class="mdl-cell mdl-cell--12-col">
+                  <span class="pipeline-title">dsub command</span>
+                <div class="mdl-cell mdl-cell--12-col code-block">
+                       <div ><span class="pipeline-code">dsub \</span></div>
+                       <div ng-show="region"><span class="pipeline-code">--regions {{region}} \</span></div>
+                       <div ng-show="cmd"><span class="pipeline-code" >--command-line '{{cmd}}'  \ </span></div>
+                       <div ng-show="docker"><span class="pipeline-code">--image "{{docker}}" \</span></div>
+                       <div ng-show="input"><span class="pipeline-code">--inputs IN={{input}} \</span></div>
+                       <div ng-show="output"><span class="pipeline-code">--outputs OUT={{output}} \</span></div>
+                       <div ng-show="logging"><span class="pipeline-code">--logging {{logging}} \</span></div>
+                       <div ng-show="yamlfile"><span class="pipeline-code">--p-file {{yamlfile}} \</span></div>
+                       <div ng-show="disksize"><span class="pipeline-code">--disk-size {{disksize}} \</span></div>
+                       <div ng-show="envvars"><span class="pipeline-code">--env-vars {{envvars}} \</span></div>
+                       <div ng-show="inputsfromfile"><span class="pipeline-code">--inputs-from-file {{inputsfromfile}} \</span></div>
+                       <div ng-show="preemptible"><span class="pipeline-code">--preemptible {{preemptible}} \</span></div>
+                       <div ng-show="bootdisksize"><span class="pipeline-code">--boot-disk-size {{bootdisksize}} \</span></div>
+                       <div ng-show="labels"><span class="pipeline-code">--labels {{labels}} \</span></div>
+                       <div ng-show="location"><span class="pipeline-code">--location {{location}} \</span></div>
+                       <div ng-show="machinetype"><span class="pipeline-code">--machine-type {{machinetype}} \</span></div>
+                       <div ng-show="network"><span class="pipeline-code">--network {{network}} \</span></div>
+                       <div ng-show="subnetwork"><span class="pipeline-code">--subnetwork {{subnetwork}} \</span></div>
+                       <div ng-show="serviceaccountemail"><span class="pipeline-code">--service-account-email {{serviceaccountemail}} \</span></div>
+                       <div ng-show="serviceaccountscopes"><span class="pipeline-code">--service-account-scopes {{serviceaccountscopes}} \</span></div>
+                       <div ng-show="zones"><span class="pipeline-code">--zones {{zones}} \</span></div>
+                       <div ng-show='GCLOUD_WIDE_FLAG'><span class="pipeline-code"> {{GCLOUD_WIDE_FLAG}} \</span></div>
+                       <div class="pipeline-code">--wait</div>
+                </div>
+              </div>
+             </div>
+             <!-- mdl tab content ends -->
+            </div>
+            <!-- mdl tab bar ends -->
+          </div>
+        </div>
+        <!--right Card ends -->
+
+        <div class="mdl-cell mdl-cell--12-col">
+          <!--Card starts -->
+          <div class="pipeline-card mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title">
+              <div class="input-block">Example</div>
+            </div>
+            <div class="mdl-card__supporting-text">
+              <div class="code-block-blue">
+                <div class="pipeline-code">
+              gcloud beta lifesciences pipelines run \
+                --regions us-east1 \
+                --command-line 'samtools index ${IN} ${OUT}' \
+                --docker-image "gcr.io/genomics-tools/samtools" \
+                --inputs IN=gs://genomics-public-data/NA12878.chr20.sample.bam \
+                --outputs OUT=gs://hari-dataset2/BAM_output/NA12878.chr20.sample.bam.bai
+              </div>
+              </div>
+            </div>
+            <!-- <div class="mdl-card__actions mdl-card--border">
+
+            </div> -->
+          </div>
+          <!--Card ends -->
+        </div>
+      </div>
+      </div>
+    </main>
+    <!-- Main ends -->
+    </div>
+  </body>
+</html>
+
+
+          <!-- <tabs>
+            <pane title="Localization">
+              <span>Date: {{ '2012-04-01' | date:'fullDate' }}</span><br>
+              <span>Currency: {{ 123456 | currency }}</span><br>
+              <span>Number: {{ 98765.4321 | number }}</span><br>
+            </pane>
+            <pane title="Pluralization">
+              <div ng-controller="lapiController">
+                <div ng-repeat="project in projects">
+                  {{project.name}}
+                </div>
+              </div>
+            </pane>
+          </tabs> -->

@@ -1,0 +1,29 @@
+{
+  "name": "pipeline",
+  "version": "1.0.0",
+  "description": "UI interface to run lifesciences API or dsub commands",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "lifesciences",
+    "api",
+    "UI"
+  ],
+  "author": "Hariprasad Radhakrishnan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "google-auth-library": "^5.7.0",
+    "http": "0.0.0",
+    "opn": "^6.0.0",
+    "path": "^0.12.7",
+    "request-promise": "^4.2.5",
+    "server-destroy": "^1.0.1",
+    "url": "^0.11.0",
+    "util": "^0.12.1"
+  }
+}
